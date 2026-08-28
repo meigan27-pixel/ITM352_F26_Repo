@@ -1,4 +1,4 @@
-# ITM352-1
+# ITM352_F26_Repo
 ITM 352 repo for class exercise
 
 awesome repo
