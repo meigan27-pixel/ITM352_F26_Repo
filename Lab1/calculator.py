@@ -1,56 +1,34 @@
-def calculator():
-    """
-    A simple calculator program that performs basic math operations.
-    Supports: addition, subtraction, multiplication, and division.
-    """
-    
-    print("=" * 40)
-    print("       SIMPLE CALCULATOR")
-    print("=" * 40)
-    
+# Basic calculator program
+
+while True:
     try:
-        # Get two numbers from the user
-        num1 = float(input("\nEnter the first number: "))
+        num1 = float(input("Enter the first number: "))
         num2 = float(input("Enter the second number: "))
-        
-        # Display operation options
-        print("\nSelect an operation:")
-        print("1. Addition (+)")
-        print("2. Subtraction (-)")
-        print("3. Multiplication (*)")
-        print("4. Division (/)")
-        
-        operation = input("\nEnter your choice (1/2/3/4): ").strip()
-        
-        # Perform the selected operation
-        if operation == '1':
+        operation = input("Choose an operation (+, -, *, /): ")
+
+        if operation == '+':
             result = num1 + num2
-            print(f"\n{num1} + {num2} = {result}")
-        
-        elif operation == '2':
+        elif operation == '-':
             result = num1 - num2
-            print(f"\n{num1} - {num2} = {result}")
-        
-        elif operation == '3':
+        elif operation == '*':
             result = num1 * num2
-            print(f"\n{num1} * {num2} = {result}")
-        
-        elif operation == '4':
-            # Error handling for division by zero
+        elif operation == '/':
             if num2 == 0:
-                print("\nError: Cannot divide by zero!")
+                print("Error: Division by zero is not allowed.")
+                result = None
             else:
                 result = num1 / num2
-                print(f"\n{num1} / {num2} = {result}")
-        
         else:
-            print("\nError: Invalid operation choice. Please enter 1, 2, 3, or 4.")
-    
+            print("Error: Invalid operation selected.")
+            result = None
+
+        if result is not None:
+            print(f"Result: {result}")
+
     except ValueError:
-        print("\nError: Please enter valid numbers.")
-    
-    print("\n" + "=" * 40)
+        print("Error: Please enter valid numbers.")
 
-
-if __name__ == "__main__":
-    calculator()
+    again = input("Would you like to calculate again? (y/n): ").lower()
+    if again != 'y':
+        print("Goodbye!")
+        break
