@@ -8,7 +8,7 @@ value_as_int = int(value_entered)
 
 valuedSquared = value_as_int ** 2
 
-print("you entered: " + value_as_int)
-print("the square of your number is: " + valuedSquared)
+print("you entered: ", value_as_int)
+print("the square of your number is: ", valuedSquared)
 
-print("you entered: {value_as_int} and the square of your number is: {valuedSquared}")
+#print("you entered: {value_as_int} and the square of your number is: {valuedSquared}")
