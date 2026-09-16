@@ -10,5 +10,5 @@ print("Shopping List:", shoppingList)
 shoppingList.remove("eggs")
 print("Updated Shopping List:", shoppingList)
 
-shoppingList.pop
+shoppingList.pop()
 print("Final Shopping List:", shoppingList)
