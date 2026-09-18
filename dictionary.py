@@ -12,3 +12,6 @@ print("country capitals:", countryCapitals)
 print("Capital of USA:", countryCapitals["USA"])
 print("Capital of France:", countryCapitals["France"])
 print("Capital of Japan:", countryCapitals["Japan"])
+
+countryCapitals["Germany"] = "Berlin"
+print(countryCapitals["Germany"])
