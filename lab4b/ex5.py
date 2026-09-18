@@ -8,3 +8,6 @@ wordList = sentence.split()
 wordList.reverse()
 reversed_sentence = " ".join(wordList)
 print("Reversed sentence:", reversed_sentence)
+
+joinedSentence = sentence + " " + reversed_sentence
+print("Joined sentence:", joinedSentence)
