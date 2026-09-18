@@ -15,3 +15,6 @@ print("Capital of Japan:", countryCapitals["Japan"])
 
 countryCapitals["Germany"] = "Berlin"
 print(countryCapitals["Germany"])
+
+print("Germany" in countryCapitals)
+print("Spain" not in countryCapitals)
