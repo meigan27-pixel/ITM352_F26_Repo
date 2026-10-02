@@ -10,4 +10,4 @@ for purchase in recentPurchases:
         break
     else:
         print(f"this purchase {purchase} is within budget")
-    
+
