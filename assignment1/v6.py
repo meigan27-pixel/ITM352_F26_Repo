@@ -10,7 +10,10 @@ import random
 questions = {
     "what is the capital of france?": ["Paris", "Toulouse", "Lyon"],
     "what is the capital of germany?": ["Berlin", "Hamburg", "Munich"],
-    "what is the capital of italy?": ["Rome", "Milan", "Naples"]
+    "what is the capital of italy?": ["Rome", "Milan", "Naples"],
+    "what is the capital of spain?": ["Madrid", "Barcelona", "Seville"],
+    "what is the capital of japan?": ["Tokyo", "Kyoto", "Osaka"],
+    "what is the capital of canada?": ["Ottawa", "Toronto", "Vancouver"]
 }
 
 NUM_QUESTIONS_PER_QUIZ = 5
@@ -18,7 +21,7 @@ numQuestions = min(NUM_QUESTIONS_PER_QUIZ, len(questions))
 selectedQuestions = random.sample(list(questions.items()), numQuestions)
 numCorrect = 0
 
-for num , (question, answers) in enumerate(questions.items(), start=1):
+for num , (question, answers) in enumerate(selectedQuestions, start=1):
     correctAnswer = answers[0]
     print(f"\nQuestion {num}: {question}")
     sortedAnswers = sorted(answers)
@@ -39,4 +42,4 @@ for num , (question, answers) in enumerate(questions.items(), start=1):
     else:
         print(f"the asnwer is '{correctAnswer}', not {answer!r}")
 
-print(f"\nYou got {numCorrect} out of {len(questions)} correct.")
+print(f"\nYou got {numCorrect} out of {len(selectedQuestions)} correct.")
