@@ -1,0 +1,9 @@
+{
+  "what is the capital of france?": ["Paris", "Toulouse", "Lyon"],
+  "what is the capital of germany?": ["Berlin", "Hamburg", "Munich"],
+  "what is the capital of italy?": ["Rome", "Milan", "Naples"],
+  "what is the capital of spain?": ["Madrid", "Barcelona", "Seville"],
+  "what is the capital of japan?": ["Tokyo", "Kyoto", "Osaka"],
+  "what is the capital of canada?": ["Ottawa", "Toronto", "Vancouver"],
+  "what is the largest planet in our solar system?": ["Jupiter", "Saturn", "Neptune"]
+}

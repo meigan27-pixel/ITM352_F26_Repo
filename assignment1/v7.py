@@ -7,40 +7,46 @@
 
 from string import ascii_lowercase
 import random
+import json
 
-questions = {
-    "what is the capital of france?": ["Paris", "Toulouse", "Lyon"],
-    "what is the capital of germany?": ["Berlin", "Hamburg", "Munich"],
-    "what is the capital of italy?": ["Rome", "Milan", "Naples"],
-    "what is the capital of spain?": ["Madrid", "Barcelona", "Seville"],
-    "what is the capital of japan?": ["Tokyo", "Kyoto", "Osaka"],
-    "what is the capital of canada?": ["Ottawa", "Toronto", "Vancouver"]
-}
+questionFile = open("questions.json", "r")
+questions = json.load(questionFile)
 
 NUM_QUESTIONS_PER_QUIZ = 5
-numQuestions = min(NUM_QUESTIONS_PER_QUIZ, len(questions))
-selectedQuestions = random.sample(list(questions.items()), numQuestions)
-numCorrect = 0
 
-for num , (question, answers) in enumerate(selectedQuestions, start=1):
-    correctAnswer = answers[0]
-    print(f"\nQuestion {num}: {question}")
-    sortedAnswers = sorted(answers)
-    labeledAnswers = dict(zip(ascii_lowercase, random.sample(sortedAnswers, k=len(sortedAnswers))))
+def prepareQuestions(questions, numQuestions):
+    numQuestions  = min(numQuestions, len(questions))
+    return random.sample(list(questions.items()), k = numQuestions)
+
+def getAnswer(question, alternatives):
+    labeledAnswers = dict(zip(ascii_lowercase, alternatives))
 
     for label, answer in labeledAnswers.items():
         print(f"{label}. {answer}")
 
     while (answerLabel := input("choice? ").lower()) not in labeledAnswers:
-        print(f"invalid choice. please select one of {", ".join(labeledAnswers.keys())}.")
+        print(f"invalid choice. please select one of {', '.join(labeledAnswers.keys())}.")
 
-    #answerLabel = input("choice? ").lower() 
     answer = labeledAnswers.get(answerLabel)
+    return labeledAnswers[answerLabel]
 
+def askQuestion(question, alternatives):
+    correctAnswer = alternatives[0]
+    orderedAlternatives = random.sample(alternatives, k = len(alternatives))
+    answer = getAnswer(question, orderedAlternatives)
     if answer == correctAnswer:
         print("correct")
-        numCorrect += 1
+        return 1
     else:
-        print(f"the asnwer is '{correctAnswer}', not {answer!r}")
+        print(f"the answer is '{correctAnswer}', not {answer!r}")
+        return 0
+    
+questions =  prepareQuestions(questions, NUM_QUESTIONS_PER_QUIZ)
 
-print(f"\nYou got {numCorrect} out of {len(selectedQuestions)} correct.")
+numCorrect = 0
+
+for num, (question, answers) in enumerate(questions, start = 1):
+    print(f"\nQuestion {num}: {question}")
+    numCorrect += askQuestion(question, answers)
+
+print(f"\nYou got {numCorrect} correct.")
