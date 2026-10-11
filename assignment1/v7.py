@@ -9,15 +9,19 @@ from string import ascii_lowercase
 import random
 import json
 
+#load the questions from a json file
 questionFile = open("questions.json", "r")
 questions = json.load(questionFile)
 
 NUM_QUESTIONS_PER_QUIZ = 5
 
+#randomizes the order of the questions and selects only 5
 def prepareQuestions(questions, numQuestions):
     numQuestions  = min(numQuestions, len(questions))
     return random.sample(list(questions.items()), k = numQuestions)
 
+#labels the answers with letters. allows for user to select answer as lower or upper case.
+# prints invalid choice if user selects an invalid option.
 def getAnswer(question, alternatives):
     labeledAnswers = dict(zip(ascii_lowercase, alternatives))
 
@@ -30,12 +34,14 @@ def getAnswer(question, alternatives):
     answer = labeledAnswers.get(answerLabel)
     return labeledAnswers[answerLabel]
 
-def askQuestion(question, alternatives):
-    correctAnswer = alternatives[0]
-    orderedAlternatives = random.sample(alternatives, k = len(alternatives))
-    answer = getAnswer(question, orderedAlternatives)
+#randomizes order of answers. 
+def askQuestion(questionData):
+    choices = questionData["choices"]
+    correctAnswer = choices[0] 
+    orderedAlternatives = random.sample(choices, k = len(choices)) 
+    answer = getAnswer("", orderedAlternatives)
     if answer == correctAnswer:
-        print("correct")
+        print(questionData["explanation"])
         return 1
     else:
         print(f"the answer is '{correctAnswer}', not {answer!r}")
@@ -45,8 +51,10 @@ questions =  prepareQuestions(questions, NUM_QUESTIONS_PER_QUIZ)
 
 numCorrect = 0
 
-for num, (question, answers) in enumerate(questions, start = 1):
+#prints the question and keeps track of correct answers.
+for num, (question, questionData) in enumerate(questions, start = 1):
     print(f"\nQuestion {num}: {question}")
-    numCorrect += askQuestion(question, answers)
+    numCorrect += askQuestion(questionData)
 
+#print total correct answers
 print(f"\nYou got {numCorrect} correct.")

@@ -1,9 +1,30 @@
 {
-  "what is the capital of france?": ["Paris", "Toulouse", "Lyon"],
-  "what is the capital of germany?": ["Berlin", "Hamburg", "Munich"],
-  "what is the capital of italy?": ["Rome", "Milan", "Naples"],
-  "what is the capital of spain?": ["Madrid", "Barcelona", "Seville"],
-  "what is the capital of japan?": ["Tokyo", "Kyoto", "Osaka"],
-  "what is the capital of canada?": ["Ottawa", "Toronto", "Vancouver"],
-  "what is the largest planet in our solar system?": ["Jupiter", "Saturn", "Neptune"]
+  "what is the capital of france?": {
+    "choices": ["Paris", "Toulouse", "Lyon"],
+    "explanation": "Correct! The capital of France is Paris, which is the largest city in the country."
+  },
+  "what is the capital of germany?": {
+    "choices": ["Berlin", "Hamburg", "Munich"],
+    "explanation": "Correct! Berlin has been the capital of Germany since 1990."
+  },
+  "what is the capital of italy?": {
+    "choices": ["Rome", "Milan", "Naples"],
+    "explanation": "Correct! The capital of Italy is Rome, being the center of the historic Roman Empire."
+  },
+  "what is the capital of spain?": {
+    "choices": ["Madrid", "Barcelona", "Seville"],
+    "explanation": "Correct! Madrid was chosen by King Phillip II in the 16th century."
+  },
+  "what is the capital of japan?": {
+    "choices": ["Tokyo", "Kyoto", "Osaka"],
+    "explanation": "Correct! The capital of Japan is Tokyo."
+  },
+  "what is the capital of canada?": {
+    "choices": ["Ottawa", "Toronto", "Vancouver"],
+    "explanation": "Correct! The capital of Canada is Ottawa."
+  },
+  "what is the largest planet in our solar system?": {
+    "choices": ["Jupiter", "Saturn", "Neptune"],
+    "explanation": "Correct! Jupiter is the largest planet in our solar system."
+  }
 }
