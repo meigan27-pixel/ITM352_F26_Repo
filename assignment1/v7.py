@@ -21,7 +21,7 @@ def prepareQuestions(questions, numQuestions):
     return random.sample(list(questions.items()), k = numQuestions)
 
 #labels the answers with letters. allows for user to select answer as lower or upper case.
-# prints invalid choice if user selects an invalid option.
+#prints invalid choice if user selects an invalid option.
 def getAnswer(question, alternatives):
     labeledAnswers = dict(zip(ascii_lowercase, alternatives))
 
@@ -34,7 +34,7 @@ def getAnswer(question, alternatives):
     answer = labeledAnswers.get(answerLabel)
     return labeledAnswers[answerLabel]
 
-#randomizes order of answers. 
+#randomizes order of answers from choices dictionary and prints the explanations for the correct answers. 
 def askQuestion(questionData):
     choices = questionData["choices"]
     correctAnswer = choices[0] 
@@ -58,3 +58,15 @@ for num, (question, questionData) in enumerate(questions, start = 1):
 
 #print total correct answers
 print(f"\nYou got {numCorrect} correct.")
+
+#reads high score from file and compares to current score. replaces high score if higher and in the file.
+with open("highscore.txt", "r") as file:
+    highScore = int(file.read())
+
+if numCorrect > highScore:
+    highScore = numCorrect
+
+    with open("highscore.txt", "w") as file:
+        file.write(str(highScore))
+
+    print(f"🎉 New high score: {highScore}!")
