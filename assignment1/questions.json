@@ -3,10 +3,6 @@
     "choices": ["Paris", "Toulouse", "Lyon"],
     "explanation": "Correct! The capital of France is Paris, which is the largest city in the country."
   },
-  "what are programming languages?": {
-    "choices": ["python", "java", "html"],
-    "explanation": "Correct! Python and Java are both programming languages. HTML is a markup language."
-  },
   "what is the capital of italy?": {
     "choices": ["Rome", "Milan", "Naples"],
     "explanation": "Correct! The capital of Italy is Rome, being the center of the historic Roman Empire."
