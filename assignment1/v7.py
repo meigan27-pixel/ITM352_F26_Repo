@@ -60,13 +60,13 @@ for num, (question, questionData) in enumerate(questions, start = 1):
 print(f"\nYou got {numCorrect} correct.")
 
 #reads high score from file and compares to current score. replaces high score if higher and in the file.
-with open("highscore.txt", "r") as file:
-    highScore = int(file.read())
+highScoreFile = open("highScore.txt", "r")
+highScore = int(highScoreFile.read())
 
 if numCorrect > highScore:
     highScore = numCorrect
 
-    with open("highscore.txt", "w") as file:
-        file.write(str(highScore))
+    highScoreFile = open("highScore.txt", "w")
+    highScoreFile.write(str(highScore))
 
-    print(f"🎉 New high score: {highScore}!")
+    print(f"New high score: {highScore}!")
