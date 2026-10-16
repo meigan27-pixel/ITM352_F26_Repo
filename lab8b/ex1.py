@@ -6,6 +6,6 @@ product = {
 
 tax_rate = 0.045
 
-total = product["price"] + product["price"] * tax_rate
+total = float(product["price"].strip('$')) + float(product["price"].strip('$')) * tax_rate
 
-print(f"A {product.name} costs {total}")
+print(f"A {product['name']} costs {total}")
