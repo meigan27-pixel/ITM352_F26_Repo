@@ -3,9 +3,12 @@
 # loop entirely and print a message when it reaches 8 (using break).
 
 for x in range(10):
+    if x == 8:
+            print("done!")
+            break
     if x != 5:
         print(x)
         continue
-    if x == 8:
-        print("done!")
-        break
+#order of if statements needed to be switched
+#all numbers except 5 would be printed since it continues through 
+#the whole list before moveing onto the next if statement
