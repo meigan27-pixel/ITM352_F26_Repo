@@ -15,18 +15,27 @@ weekly_steps = {
    "Noa":     [4000, 5200, 3800, 6100, 4500, 5000, 4400],
 }
 
-
+#gold needed to have >= since it includes 10000
 def choose_badge(average):
-   if average > 10000:
+   if average >= 10000:
        return "Gold"
    elif average >= 7500:
        return "Silver"
    else:
        return "Bronze"
 
+def average(steps):
+    total = 0
+    for name in weekly_steps:
+       days = weekly_steps[name]
+    for steps in days:
+       total += steps 
 
-total = 0
+
+#total needed to be in the for loop to reset the total for each person
+# to 0 or it would just keep adding to the previous total
 for name in weekly_steps:
+   total = 0
    days = weekly_steps[name]
    for steps in days:
        total += steps
