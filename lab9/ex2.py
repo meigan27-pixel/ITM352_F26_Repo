@@ -19,6 +19,6 @@ with open(csvFileName, mode ='r') as csvFile:
     minSalary = min(salaries)
     maxSalary = max(salaries)
 
-    print(f"Average Salary: {round(aveSalary, 2)}")
-    print(f"Minimum Salary: {round(minSalary, 2)}")
-    print(f"Maximum Salary: {round(maxSalary, 2)}")
+    print(f"Average Salary: ${aveSalary:.2f}")
+    print(f"Minimum Salary: ${minSalary:.2f}")
+    print(f"Maximum Salary: ${maxSalary:.2f}")
