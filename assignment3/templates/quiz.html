@@ -2,35 +2,43 @@
 <html>
 <head>
     <title>Quiz Question</title>
+    <style>
+        body {
+            align-items: center;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 0;
+            min-height: 100vh;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        form {
+            line-height: 1.8;
+        }
+
+        button {
+            margin-top: 0.75rem;
+        }
+    </style>
 </head>
 <body>
 
-<h2>
-    Question {{ question_number }} of {{ total }}
-</h2>
-
+<h2>Question {{ question_number }} of {{ total }}</h2>
 <h3>{{ question.question }}</h3>
 
 <form action="/submit" method="POST">
-
     {% for choice in question.choices %}
-
-        <input
-            type="radio"
-            name="answer"
-            value="{{ choice }}"
-            required>
-
-        {{ choice }}
-
+        <label>
+            <input type="radio" name="answer" value="{{ choice }}" required>
+            {{ choice }}
+        </label>
         <br>
-
     {% endfor %}
 
-    <button type="submit">
-        Submit Answer
-    </button>
-
+    <button type="submit">Submit Answer</button>
 </form>
 
 </body>

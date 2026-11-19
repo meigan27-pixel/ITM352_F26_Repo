@@ -2,6 +2,19 @@
 <html>
 <head>
     <title>Quiz Game</title>
+    <style>
+        body {
+            align-items: center;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 0;
+            min-height: 100vh;
+            padding: 1.5rem;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 
@@ -12,6 +25,10 @@
     <a href="{{ url_for('start_quiz') }}">
         Start Quiz
     </a>
+
+    <p>
+        <a href="{{ url_for('leaderboard') }}">View Leaderboard</a>
+    </p>
 
 </body>
 </html>

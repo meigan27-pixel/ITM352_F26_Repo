@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Answer Explanation</title>
+    <style>
+        body {
+            align-items: center;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+            max-width: 42rem;
+            justify-content: center;
+            margin: 0 auto;
+            min-height: 100vh;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+
+        .feedback-card {
+            border: 2px solid;
+            border-radius: 0.75rem;
+            box-sizing: border-box;
+            margin: 1.5rem 0;
+            padding: 1rem 1.5rem;
+            width: 100%;
+            animation: feedback-in 400ms ease-out both;
+        }
+
+        .feedback-card.correct {
+            background: #f0fdf4;
+            border-color: #15803d;
+            color: #14532d;
+        }
+
+        .feedback-card.incorrect {
+            background: #fef2f2;
+            border-color: #b91c1c;
+            color: #7f1d1d;
+        }
+
+        .feedback-card h2 {
+            margin-top: 0;
+        }
+
+        .correct-answer {
+            font-weight: bold;
+        }
+
+        .button-link {
+            background: #1d4ed8;
+            border-radius: 0.35rem;
+            color: white;
+            display: inline-block;
+            margin-right: 0.5rem;
+            padding: 0.65rem 1rem;
+            text-decoration: none;
+        }
+
+        .button-link:focus-visible {
+            outline: 3px solid #1e3a8a;
+            outline-offset: 3px;
+        }
+
+        @keyframes feedback-in {
+            from {
+                opacity: 0;
+                transform: translateY(0.75rem) scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .feedback-card {
+                animation: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h1>Question {{ question_number }} of {{ total }}</h1>
+
+<section class="feedback-card {% if feedback.correct %}correct{% else %}incorrect{% endif %}"
+         aria-labelledby="feedback-title">
+    {% if feedback.correct %}
+        <h2 id="feedback-title">Correct!</h2>
+    {% else %}
+        <h2 id="feedback-title">Incorrect</h2>
+    {% endif %}
+
+    <p class="correct-answer">Correct answer: {{ feedback.correct_answer }}</p>
+    <p>{{ feedback.explanation }}</p>
+</section>
+
+{% if finished %}
+    <h2>Quiz Complete!</h2>
+    <p>That was the last question. View your results on the next page.</p>
+    <a class="button-link" href="/results">View results</a>
+{% else %}
+    <a class="button-link" href="/next">Next question</a>
+{% endif %}
+
+</body>
+</html>

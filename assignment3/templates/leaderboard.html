@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz Leaderboard</title>
+</head>
+<body>
+
+<h1>Leaderboard</h1>
+
+{% if scores %}
+    <table>
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for score in scores %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ score }} / 5</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>No scores yet. Complete a quiz to appear on the leaderboard.</p>
+{% endif %}
+
+<a href="/">Back to home</a>
+
+</body>
+</html>

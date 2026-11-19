@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify, session
+from flask import Flask, redirect, render_template, request, session
 from string import ascii_lowercase
 import random
 import json
@@ -25,17 +25,25 @@ def prepareQuestions(questions, numQuestions):
     return random.sample(list(questions.items()), k=numQuestions)
 
 # -------------------------
+# Load Scores
+# -------------------------
+def load_scores():
+
+    filename = "scores.json"
+
+    if not os.path.exists(filename):
+        return []
+
+    with open(filename, "r") as file:
+        return json.load(file)
+
+# -------------------------
 # Save Score
 # -------------------------
 def save_score(score):
 
     filename = "scores.json"
-
-    if os.path.exists(filename):
-        with open(filename, "r") as file:
-            scores = json.load(file)
-    else:
-        scores = []
+    scores = load_scores()
 
     scores.append(score)
 
@@ -47,15 +55,16 @@ def save_score(score):
 # -------------------------
 def get_high_score():
 
-    filename = "scores.json"
-
-    if not os.path.exists(filename):
-        return 0
-
-    with open(filename, "r") as file:
-        scores = json.load(file)
-
+    scores = load_scores()
     return max(scores) if scores else 0
+
+# -------------------------
+# Leaderboard
+# -------------------------
+@app.route("/leaderboard")
+def leaderboard():
+    scores = sorted(load_scores(), reverse=True)
+    return render_template("leaderboard.html", scores=scores)
 
 
 # -------------------------
@@ -102,11 +111,26 @@ def start_quiz():
     session["score"] = 0
     session["current"] = 0
     session["start_time"] = time.time()
+    session["quiz_finished"] = False
+
+    return render_template("quiz.html", question=quiz[0], question_number=1, total=len(quiz))
+
+# -------------------------
+# Next Question
+# -------------------------
+@app.route("/next")
+def next_question():
+
+    quiz = session.get("quiz")
+    current = session.get("current", 0)
+
+    if not quiz or current >= len(quiz) or session.get("quiz_finished"):
+        return redirect("/")
 
     return render_template(
         "quiz.html",
-        question=quiz[0],
-        question_number=1,
+        question=quiz[current],
+        question_number=current + 1,
         total=len(quiz)
     )
 
@@ -142,8 +166,9 @@ def submit():
 
     session["current"] += 1
 
-    if session["current"] >= len(quiz):
+    finished = session["current"] >= len(quiz)
 
+    if finished:
         score = session["score"]
 
         duration = round(
@@ -151,31 +176,40 @@ def submit():
             2
         )
 
+        session["quiz_finished"] = True
+        session["duration"] = duration
         save_score(score)
 
-        return jsonify({
-            "finished": True,
-            "score": score,
-            "high_score": get_high_score(),
-            "duration": duration,
-            "feedback": feedback
-        })
+        return render_template(
+            "explanation.html",
+            feedback=feedback,
+            question_number=current + 1,
+            total=len(quiz),
+            finished=True
+        )
 
-    next_question = quiz[session["current"]]
-
-    return jsonify({
-        "finished": False,
-        "feedback": feedback,
-        "question": next_question,
-        "number": session["current"] + 1
-    })
+    return render_template(
+        "explanation.html",
+        feedback=feedback,
+        question_number=current + 1,
+        total=len(quiz),
+        finished=False
+    )
 
 # -------------------------
 # Results Page
 # -------------------------
 @app.route("/results")
 def results():
-    return render_template("results.html")
+    if not session.get("quiz_finished"):
+        return redirect("/")
+
+    return render_template(
+        "results.html",
+        score=session["score"],
+        high_score=get_high_score(),
+        duration=session["duration"]
+    )
 
 if __name__ == "__main__":
     app.run(debug=True)
